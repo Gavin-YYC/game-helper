@@ -26,17 +26,16 @@ electron: 6.0.0
 
 ```
 npm i
-```
-
-**重新构建winax**
-
-```
-./node_modules/.bin/electron-rebuild
+npm run rebuild
 ```
 
 **启动项目**
 
+```
 npm run dev
+```
+
+会先编译renderer，然后在启动electron项目。
 
 **构建**
 

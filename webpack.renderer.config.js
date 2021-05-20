@@ -41,5 +41,9 @@ module.exports = {
     output: {
         filename: 'renderer.bundle.js',
         path:  path.resolve(__dirname, 'dist')
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        port: 8080
     }
 };

@@ -17,6 +17,9 @@ ipcMain.addListener('dm.Ver', () => {
 });
 
 function createWindow () {
+    const url = process.env.NODE_ENV === 'development'
+      ? 'http://localhost:8080/index.html'
+      : './index.html';
     const win = new BrowserWindow({
         width: 800,
         height: 600,
@@ -26,7 +29,8 @@ function createWindow () {
         }
     });
 
-    win.loadFile('./index.html');
+
+    win.loadURL(url);
     win.webContents.on('did-finish-load', () => {
       win.webContents.openDevTools();
     });
