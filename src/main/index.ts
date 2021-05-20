@@ -1,6 +1,6 @@
 /**
  * @file game
- * @author yyc
+ * @author Gavin
  */
 
 import {app, BrowserWindow, ipcMain} from 'electron';

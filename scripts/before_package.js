@@ -1,6 +1,6 @@
 /**
  * @file before package
- * @author yyc
+ * @author Gavin
  */
 const fs = require('fs');
 const path = require('path');

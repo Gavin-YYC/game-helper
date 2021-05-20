@@ -1,6 +1,6 @@
 /**
  * @file render entry
- * @author yyc
+ * @author Gavin
  */
 
 import Vue from 'vue';

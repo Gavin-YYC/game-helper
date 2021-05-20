@@ -1,6 +1,6 @@
 /**
  * @file webpack renderer config
- * @author yyc
+ * @author Gavin
  */
 
  const path = require('path');
