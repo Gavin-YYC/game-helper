@@ -10,7 +10,7 @@
         "build:renderer": "webpack --config ./webpack.renderer.config.js",
         "build": "npm run rebuild && npm run build:renderer && npm run build:main",
         "dev:renderer": "cross-env NODE_ENV=development webpack server --config ./webpack.renderer.config.js",
-        "dev:main": "cross-env NODE_ENV=development webpack --config ./webpack.main.config.js && electron ./dist",
+        "dev:main": "cross-env NODE_ENV=development npm run build:main",
         "dev": "node ./scripts/dev.js",
         "packager:before": "node ./scripts/before_package.js",
         "packager": "npm run packager:before && npm run build && electron-packager ./dist --win --ia32 --out ./output"
@@ -23,15 +23,17 @@
         "winax": "^3.1.4"
     },
     "devDependencies": {
+        "@types/debug": "^4.1.5",
         "@types/node": "^15.0.2",
+        "copy-webpack-plugin": "^8.1.1",
         "cross-env": "^7.0.3",
+        "debug": "^4.3.1",
         "electron": "6.0.0",
         "electron-packager": "^15.2.0",
         "electron-rebuild": "^2.3.5",
         "html-webpack-plugin": "^5.3.1",
         "node-loader": "^2.0.0",
         "ts-loader": "^9.1.2",
-        "ts-node-dev": "^1.1.6",
         "typescript": "^4.2.4",
         "vue-loader": "^15.9.7",
         "vue-template-compiler": "^2.6.12",

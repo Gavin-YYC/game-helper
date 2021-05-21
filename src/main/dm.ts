@@ -6,12 +6,14 @@
 import winax from 'winax';
 import path from 'path';
 import {execSync} from 'child_process';
+import debug from '../common/debug';
 
 interface Options {
     regCode: string;
     verInfo: string;
 }
 
+const log = debug.init('dm');
 const ipList = '121.204.252.143|121.204.253.161|125.77.165.62|125.77.165.131';
 
 // 注册
@@ -33,7 +35,7 @@ function uninstall() {
     }
     catch (e) {
         if (e.message.includes('dm.dmsoft')) {
-            console.log('大漠插件卸载成功');
+            log('Uninstall dm.dmsoft successful.');
         }
     }
     
@@ -44,7 +46,7 @@ export default {
         this.uninstall();
         const dll = getObj();
         if (!dll) {
-            console.log('大漠插件注册失败！');
+            log('Register dm.dmsoft failed.');
             process.exit();
         }
 
@@ -68,9 +70,8 @@ export default {
             isVip = reg === 1;
         }
 
-        console.log('大漠插件加载成功，版本号:', dll.Ver());
-        console.log(isVip ? '高级功能已经注册' : '');
-        console.log('---------------------------------');
+        log('Install dm.dmsoft successful. Version:', dll.Ver());
+        log(isVip ? 'Register dm.dmsoft VIP successful' : '');
 
         return dll;
     },

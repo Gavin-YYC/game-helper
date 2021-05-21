@@ -4,6 +4,7 @@
  */
 
  const path = require('path');
+ const CopyPlugin = require("copy-webpack-plugin");
  const isDevMode = process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -23,6 +24,16 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: './src/main/dm.dll',
+                    to: 'dm.dll'
+                }
+            ]
+        })
+    ],
     resolve: {
         extensions: ['.ts', '.js', '.json', '.node']
     },

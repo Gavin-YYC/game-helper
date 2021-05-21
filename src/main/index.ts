@@ -3,8 +3,9 @@
  * @author Gavin
  */
 
+import debug from '../common/debug';
 import {app, BrowserWindow, ipcMain} from 'electron';
-import dmDll from './lib/dm';
+import dmDll from './dm';
 import dmConf from '../../.reginfo.json';
 
 const dm = dmDll.install({
@@ -12,14 +13,17 @@ const dm = dmDll.install({
     verInfo: dmConf.ver_info
 });
 
-ipcMain.addListener('dm.Ver', () => {
-  console.log(dm.Ver());
+ipcMain.on('dm.Ver', e => {
+  e.reply('dm.Ver', dm.Ver());
 });
 
 function createWindow () {
-    const url = process.env.NODE_ENV === 'development'
+    const url = debug.isDev()
       ? 'http://localhost:8080/index.html'
-      : './index.html';
+      : `file://${__dirname}/index.html`;
+
+    console.log(url);
+
     const win = new BrowserWindow({
         width: 800,
         height: 600,
@@ -28,7 +32,6 @@ function createWindow () {
           contextIsolation: false
         }
     });
-
 
     win.loadURL(url);
     win.webContents.on('did-finish-load', () => {
