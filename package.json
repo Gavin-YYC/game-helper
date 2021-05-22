@@ -10,7 +10,7 @@
         "build:renderer": "webpack --config ./webpack.renderer.config.js",
         "build": "npm run rebuild && npm run build:renderer && npm run build:main",
         "dev:renderer": "cross-env NODE_ENV=development webpack server --config ./webpack.renderer.config.js",
-        "dev:main": "cross-env NODE_ENV=development npm run build:main",
+        "dev:main": "cross-env NODE_ENV=development npm run build:main && electron dist",
         "dev": "node ./scripts/dev.js",
         "packager:before": "node ./scripts/before_package.js",
         "packager": "npm run packager:before && npm run build && electron-packager ./dist --win --ia32 --out ./output"
