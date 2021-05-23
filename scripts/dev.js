@@ -78,7 +78,7 @@ async function startMain() {
 }
 
 async function main() {
-    await startRenderer();
+    startRenderer();
     startMain();
 }
 

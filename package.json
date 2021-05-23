@@ -6,20 +6,21 @@
     "main": "src/index.ts",
     "scripts": {
         "rebuild": "electron-rebuild",
+        "build:before": "node ./scripts/before_package.js",
         "build:main": "webpack --config ./webpack.main.config.js",
         "build:renderer": "webpack --config ./webpack.renderer.config.js",
         "build": "npm run rebuild && npm run build:renderer && npm run build:main",
         "dev:renderer": "cross-env NODE_ENV=development webpack server --config ./webpack.renderer.config.js",
         "dev:main": "cross-env NODE_ENV=development webpack --config ./webpack.main.config.js --watch",
-        "dev": "node ./scripts/dev.js",
-        "packager:before": "node ./scripts/before_package.js",
-        "packager": "npm run packager:before && npm run build && electron-packager ./dist --win --ia32 --out ./output"
+        "dev": "npm run build:before && node ./scripts/dev.js",
+        "packager": "npm run build:before && npm run build && electron-packager ./dist --win --ia32 --out ./output"
     },
     "keywords": [],
     "author": "Gavin",
     "license": "ISC",
     "dependencies": {
         "vue": "^2.6.12",
+        "vue-router": "^3.5.1",
         "winax": "^3.1.4"
     },
     "devDependencies": {
