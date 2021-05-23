@@ -6,7 +6,9 @@
 import winax from 'winax';
 import path from 'path';
 import {execSync} from 'child_process';
+import dmConf from '../../.reginfo.json';
 import debug from '../common/debug';
+import {State} from './index';
 
 interface Options {
     regCode: string;
@@ -42,7 +44,7 @@ function uninstall() {
 }
  
 export default {
-    install(options: Options) {
+    install(state: State) {
         this.uninstall();
         const dll = getObj();
         if (!dll) {
@@ -51,8 +53,8 @@ export default {
         }
 
         let isVip = false;
-        if (options && options.regCode && options.verInfo) {
-            const reg = dll.RegEx(options.regCode, options.verInfo, ipList);
+        if (dmConf.regCode && dmConf.verInfo) {
+            const reg = dll.RegEx(dmConf.regCode, dmConf.verInfo, ipList);
             // -1 无法连接网络，可能防火墙拦截，需要加上IP列表
             // -2 进程没有已管理员的方式运行
             // -8 版本附加信息长度超过了20
@@ -73,7 +75,7 @@ export default {
         log('Install dm.dmsoft successful. Version:', dll.Ver());
         log(isVip ? 'Register dm.dmsoft VIP successful' : '');
 
-        return dll;
+        state.dll = dll;
     },
 
     uninstall() {
