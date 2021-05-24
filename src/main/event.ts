@@ -19,5 +19,10 @@ export default {
             });
             win.loadURL(data.url);
         });
+
+        ipcMain.on('helper:start', e => {
+            const res = state.dm.FindWindow('', 'electron-renderer-index');
+            console.log(res);
+        });
     }
 }

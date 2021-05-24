@@ -2,9 +2,8 @@
  * @file before package
  * @author Gavin
  */
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
-const childProcess = require('child_process');
 
 const pkg = path.join(__dirname, '..', 'package.json');
 const distDir = path.join(__dirname, '../dist');
@@ -22,12 +21,12 @@ const obj = {
 };
 
 // clean output dir
-childProcess.execSync(`rm -rf ${distDir}`);
-childProcess.execSync(`rm -rf ${outputDir}`);
+fs.removeSync(distDir);
+fs.removeSync(outputDir);
 
 // mkdir
-childProcess.execSync(`mkdir ${distDir}`);
-childProcess.execSync(`mkdir ${outputDir}`);
+fs.mkdirSync(distDir);
+fs.mkdirSync(outputDir);
 
 // add package.json
 fs.writeFileSync(toFile, JSON.stringify(obj, null, 4), {

@@ -51,14 +51,20 @@ async function restartElectron() {
 }
 
 async function startRenderer() {
-    const pro = childProcess.spawn('npm', ['run', 'dev:renderer'], {
-        cwd: process.cwd(),
-        shell: true
-    });
+    return new Promise(resolve => {
+        const pro = childProcess.spawn('npm', ['run', 'dev:renderer'], {
+            cwd: process.cwd(),
+            shell: true
+        });
+    
+        pro.stdout.on('data', data => {
+            const str = data.toString();
+            console.log(str.replace('\n', ''));
 
-    pro.stdout.on('data', data => {
-        const str = data.toString();
-        console.log(str.replace('\n', ''));
+            if (str.includes('successfully')) {
+                resolve();
+            }
+        });
     });
 }
 
@@ -78,7 +84,7 @@ async function startMain() {
 }
 
 async function main() {
-    startRenderer();
+    await startRenderer();
     startMain();
 }
 

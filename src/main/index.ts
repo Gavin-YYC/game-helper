@@ -12,6 +12,10 @@ export interface State {
     [propName: string]: any;
 }
 
+// 加载flash插件
+app.commandLine.appendSwitch('ppapi-flash-path', app.getPath('pepperFlashSystemPlugin'));
+app.commandLine.appendSwitch('ppapi-flash-version', '29.0.0.013');
+
 function installModule() {
     const state: State = {};
     dmDll.install(state);
@@ -27,12 +31,13 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false
+            plugins: true,
+            nodeIntegration: true
         }
     });
 
     win.loadURL(url);
+    win.webContents.openDevTools();
 }
 
 app.on('ready', () => {

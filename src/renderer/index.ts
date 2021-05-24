@@ -5,11 +5,30 @@
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import index from './views/index.vue';
+import app from './views/index.vue';
+import Home from './views/Home.vue';
+import GameWindow from './views/GameWindow.vue';
 
 Vue.use(VueRouter);
 
-new Vue({
-    el: '#app',
-    render: h => h(index)
+const router = new VueRouter({
+    routes: [
+        {
+            path: '/',
+            redirect: '/home'
+        },
+        {
+            path: '/home',
+            component: Home
+        },
+        {
+            path: '/game-window',
+            component: GameWindow
+        }
+    ]
 });
+
+new Vue({
+    router,
+    render: h => h(app)
+}).$mount('#app');

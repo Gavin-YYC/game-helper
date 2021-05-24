@@ -48,3 +48,7 @@ npm run build
 ```
 npm run packager
 ```
+
+## 备注
+
+powershell 临时解决中文乱码问题：`chcp 65001`
