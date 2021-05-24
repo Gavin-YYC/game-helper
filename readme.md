@@ -1,7 +1,19 @@
 
 # 游戏辅助
 
-练习项目，typescript + electron + webpack + vue + 大漠插件
+练习项目
+
+## 技术栈
+
+- typescript
+- electron
+- webpack
+- vue
+- vue-router
+- less
+- 大漠插件
+
+加载动态库文件、一键启动环境，main进程、render进程自动重启、加载flash插件。
 
 ## 大漠注册
 
