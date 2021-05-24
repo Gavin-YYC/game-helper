@@ -1,8 +1,8 @@
 {
-    "name": "game-helper",
+    "name": "auto-game",
     "version": "1.0.0",
-    "description": "game helper",
-    "productName": "Game Helper",
+    "description": "auto game",
+    "productName": "AutoGame",
     "main": "src/index.ts",
     "scripts": {
         "rebuild": "electron-rebuild",
