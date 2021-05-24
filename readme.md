@@ -21,8 +21,8 @@
 
 ```
 {
-    "reg_code": "",
-    "ver_info": ""
+    "regCode": "",
+    "verInfo": ""
 }
 ```
 
