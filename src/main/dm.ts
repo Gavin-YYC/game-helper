@@ -32,12 +32,10 @@ function getObj() {
 // 反注册
 function uninstall() {
     try {
-        console.log('fqwfqwfqwfqw');
         execSync(`regsvr32 ${path.join(__dirname, 'dm.dll')} /s /u`);
         new winax.Object('dm.dmsoft');
     }
     catch (e) {
-        console.log('111111111', e);
         if (e.message.includes('dm.dmsoft')) {
             log('Uninstall dm.dmsoft successful.');
         }

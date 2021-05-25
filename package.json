@@ -20,7 +20,9 @@
     "license": "ISC",
     "dependencies": {
         "electron-json-storage": "^4.5.0",
+        "element-ui": "^2.15.1",
         "fs-extra": "^10.0.0",
+        "normalize.css": "^8.0.1",
         "vue": "^2.6.12",
         "vue-router": "^3.5.1",
         "winax": "^3.1.4"
@@ -36,6 +38,7 @@
         "electron-packager": "^15.2.0",
         "electron-rebuild": "^2.3.5",
         "electron-reload": "^1.5.0",
+        "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.3.1",
         "less": "^4.1.1",
         "less-loader": "^9.0.0",
