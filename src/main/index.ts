@@ -32,6 +32,7 @@ function createWindow() {
         height: 600,
         webPreferences: {
             plugins: true,
+            webviewTag: true,
             nodeIntegration: true
         }
     });

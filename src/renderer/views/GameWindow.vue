@@ -8,14 +8,13 @@
         </div>
 
         <div v-if="url" class="webview">
-            <iframe :src="url" :useragent="ua"></iframe>
+            <webview class="web" :src="url" :useragent="ua" plugins/>
         </div>
     </div>
 </template>
 
 <script>
 import {Button} from 'element-ui';
-import {ipcRenderer} from 'electron';
 import dm from '../common/dm';
 
 export default {
@@ -38,15 +37,6 @@ export default {
 
         log() {
 
-        },
-
-        invokeDm(action, params) {
-            return new Promise(resolve => {
-                ipcRenderer.once('dm', (e, data) => {
-                    resolve(data);
-                });
-                ipcRenderer.send('dm', action, params);
-            });
         },
 
         async start() {
@@ -73,7 +63,7 @@ export default {
             // 后台绑定窗口
             const bindRes = await dm.BindWindow(hwnd, 'gdi', 'windows3', 'windows', 0);
             if (bindRes === 0) {
-                return console.log('移动窗口失败');
+                return console.log('绑定窗口失败');
             }
 
             console.log('窗口绑定成功');
@@ -99,10 +89,9 @@ export default {
     flex: 1;
     border: 1px solid red;
 
-    iframe {
+    .web {
         width: 100%;
         height: 100%;
-        display: block;
         border: none;
     }
 }
