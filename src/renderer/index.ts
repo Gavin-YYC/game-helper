@@ -6,9 +6,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import ElementUI from 'element-ui';
+import store from './common/store';
 import app from './views/index.vue';
 import Home from './views/Home.vue';
-import GameWindow from './views/GameWindow.vue';
 
 import 'normalize.css';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -25,15 +25,12 @@ const router = new VueRouter({
         {
             path: '/home',
             component: Home
-        },
-        {
-            path: '/game-window',
-            component: GameWindow
         }
     ]
 });
 
 new Vue({
+    store,
     router,
     render: h => h(app)
 }).$mount('#app');

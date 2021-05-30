@@ -1,7 +1,7 @@
 
 # Auto Game
 
-练习项目
+瞎玩系列
 
 ## 技术栈
 
@@ -9,6 +9,7 @@
 - electron
 - webpack
 - vue
+- vuex
 - vue-router
 - less
 - 大漠插件
@@ -30,8 +31,8 @@
 
 ```
 node: 12.18.3（32位）
-winax: 3.1.3
-electron: 6.0.0
+winax: 3.1.4
+electron: 11.4.7
 ```
 
 **安装依赖**

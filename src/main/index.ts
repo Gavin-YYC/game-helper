@@ -38,6 +38,7 @@ function createWindow() {
     });
 
     win.loadURL(url);
+    win.menuBarVisible = false;
     win.webContents.openDevTools();
 }
 
