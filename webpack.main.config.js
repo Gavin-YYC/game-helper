@@ -30,6 +30,10 @@ module.exports = {
                 {
                     from: './src/main/dm.dll',
                     to: 'dm.dll'
+                },
+                {
+                    from: './src/main/dm.zk.txt',
+                    to: 'dm.zk.txt'
                 }
             ]
         })

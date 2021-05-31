@@ -5,7 +5,6 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import moment from 'moment';
 
 Vue.use(Vuex);
 
@@ -22,7 +21,6 @@ export default new Vuex.Store({
 
     actions: {
         addLog({commit}, data) {
-            data.time =  moment().format('YYYY-MM-DD HH:mm:ss');
             commit('addLog', data);
         }
     }

@@ -17,6 +17,8 @@ interface Options {
 
 const log = debug.init('dm');
 const ipList = '121.204.252.143|121.204.253.161|125.77.165.62|125.77.165.131';
+const dllFile = path.join(__dirname, 'dm.dll');
+const zkFile = path.join(__dirname, 'dm.zk.txt')
 
 // 注册
 function getObj() {
@@ -24,7 +26,7 @@ function getObj() {
         return new winax.Object('dm.dmsoft');
     }
     catch (e) {
-        execSync(`regsvr32 ${path.join(__dirname, 'dm.dll')} /s`)
+        execSync(`regsvr32 ${dllFile} /s`)
         return new winax.Object('dm.dmsoft')
     }
 }
@@ -71,6 +73,9 @@ export default {
             // 77 机器码或者IP因为非法使用，而被封禁
             isVip = reg === 1;
         }
+
+        // 加载字库
+        dll.SetDict(0, zkFile);
 
         log('Install dm.dmsoft successful. Version:', dll.Ver());
         log(isVip ? 'Register dm.dmsoft VIP successful' : '');
