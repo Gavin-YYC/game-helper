@@ -27,14 +27,8 @@ module.exports = {
     plugins: [
         new CopyPlugin({
             patterns: [
-                {
-                    from: './src/main/dm.dll',
-                    to: 'dm.dll'
-                },
-                {
-                    from: './src/main/dm.zk.txt',
-                    to: 'dm.zk.txt'
-                }
+                {from: './src/main/dm.dll', to: 'dm.dll'},
+                {from: './src/main/dm.zk.txt', to: 'dm.zk.txt'}
             ]
         })
     ],

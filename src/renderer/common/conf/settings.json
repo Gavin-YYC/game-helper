@@ -1,0 +1,39 @@
+{
+    "fuben": {
+        "qg": {
+            "times": 2,
+            "buyTimes": 0,
+            "isDouble": false
+        },
+        "qh": {
+            "times": 2,
+            "buyTimes": 0,
+            "isDouble": false
+        },
+        "yb": {
+            "times": 2,
+            "buyTimes": 0,
+            "isDouble": false
+        },
+        "dj": {
+            "times": 2,
+            "buyTimes": 0,
+            "isDouble": false
+        },
+        "zs": {
+            "times": 2,
+            "buyTimes": 0,
+            "isDouble": false
+        },
+        "zb": {
+            "times": 2,
+            "buyTimes": 0,
+            "isDouble": false
+        },
+        "zsh": {
+            "times": 2,
+            "buyTimes": 0,
+            "isDouble": false
+        }
+    }
+}

@@ -12,6 +12,7 @@ module.exports = {
     entry: './src/renderer/index.ts',
     mode: isDevMode ? 'development' : 'production',
     target: 'electron-renderer',
+    devtool: "source-map",
     module: {
         rules: [
             {
