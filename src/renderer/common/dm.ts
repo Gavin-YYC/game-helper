@@ -24,6 +24,26 @@ export default {
         return await getPromise(str) as number;
     },
 
+    async FindWindowEx(parent: number, cls: string, title: string): Promise<number> {
+        const str = `this.dm.FindWindowEx(${parent}, '${cls}', '${title}')`;
+        return await getPromise(str) as number;
+    },
+
+    async FindWindowSuper(spec1: string, flag1: number, type1: number, spec2: string, flag2: number, type2: number) {
+        const str = `this.dm.FindWindowSuper('${spec1}', ${flag1}, ${type1}, '${spec2}', ${flag2}, ${type2})`;
+        return await getPromise(str) as number;
+    },
+
+    async EnumWindow(parent: number, title: string, className: string, filter: number): Promise<string> {
+        const str = `this.dm.EnumWindow(${parent}, '${title}', '${className}', ${filter})`;
+        return await getPromise(str) as string;
+    },
+
+    async GetWindowTitle(hwnd: number) {
+        const str = `this.dm.GetWindowTitle(${hwnd})`;
+        return await getPromise(str) as number;
+    },
+
     async SetWindowSize(hwnd: number, width: number, height: number): Promise<number> {
         const str = `this.dm.SetWindowSize(${hwnd}, ${width}, ${height})`;
         return await getPromise(str) as number;

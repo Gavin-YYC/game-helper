@@ -66,8 +66,9 @@ export default {
         },
 
         async action() {
-            await dmFuncs.autoSetting();
-            await dmFuncs.autoFuben();
+            await dmFuncs.test();
+            // await dmFuncs.autoSetting();
+            // await dmFuncs.autoFuben();
         }
     }
 }

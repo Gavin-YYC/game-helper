@@ -14,21 +14,26 @@ import log from './log';
 type FubenName = 'qg' | 'qh' | 'dj' | 'yb' | 'zs' | 'zb' | 'zsh';
 
 export default {
+
+    async findWindow() {
+        const pName = '迅雷';
+        const pClass = 'Chrome_WidgetWin_0';
+        const secondClass = 'TbcWindowWin';
+        const parentHwnd = await dm.FindWindow(pClass, pName);
+        const sendHwnd = await dm.FindWindowEx(parentHwnd, secondClass, '');
+        const list = await dm.EnumWindow(sendHwnd, '', '', 16 + 32);
+        const split = list.split(',').map(Number);
+        return split[split.length - 1] || 0;
+    },
+
     // 绑定窗口
     async bindWindow(): Promise<number> {
-        const name = '迅雷';
-        const cls = 'Chrome_WidgetWin_0';
-        const oldHwnd = await dm.GetBindWindow();
-        if (oldHwnd) {
-            await dm.UnBindWindow();
-        }
-
-        const hwnd = await dm.FindWindow(cls, name);
+        const hwnd = await this.findWindow();
         if (hwnd) {
             const rect = await dm.GetClientSize(hwnd);
             await dm.SetWindowSize(hwnd, rect.width, rect.height);
             await dm.MoveWindow(hwnd, -10, -10);
-            return await dm.BindWindowEx(hwnd, 'gdi', 'windows3', 'windows', '', 0);
+            return await dm.BindWindowEx(hwnd, 'gdi', 'dx.mouse.input.lock.api3', 'windows', '', 0);
         }
 
         return 0;
@@ -136,6 +141,11 @@ export default {
 
         // 关闭副本窗口
         await utils.tryCloseBox(fuben.title, fuben.close);
+    },
+
+    async test() {
+        await dm.MoveTo(740, 872);
+        await dm.LeftClick();
     }
 };
 
