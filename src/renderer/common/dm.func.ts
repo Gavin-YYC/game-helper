@@ -20,23 +20,35 @@ export default {
         const pClass = 'Chrome_WidgetWin_0';
         const secondClass = 'TbcWindowWin';
         const parentHwnd = await dm.FindWindow(pClass, pName);
+        if (!parentHwnd) {
+            console.log(`[${pName}][${pClass}]迅雷没有启动`);
+            return 0;
+        }
+
+        // 最大化父窗口
+        await dm.SetWindowSize(parentHwnd, screen.availWidth, screen.availHeight);
+        await dm.MoveWindow(parentHwnd, 0, 0);
+
         const sendHwnd = await dm.FindWindowEx(parentHwnd, secondClass, '');
+        if (!sendHwnd) {
+            console.log(`[${secondClass}]没有打开游戏页面`);
+            return 0;
+        }
+
         const list = await dm.EnumWindow(sendHwnd, '', '', 16 + 32);
         const split = list.split(',').map(Number);
         return split[split.length - 1] || 0;
     },
 
     // 绑定窗口
-    async bindWindow(): Promise<number> {
+    async bindWindow() {
         const hwnd = await this.findWindow();
-        if (hwnd) {
-            const rect = await dm.GetClientSize(hwnd);
-            await dm.SetWindowSize(hwnd, rect.width, rect.height);
-            await dm.MoveWindow(hwnd, -10, -10);
-            return await dm.BindWindowEx(hwnd, 'gdi', 'dx.mouse.input.lock.api3', 'windows', '', 0);
+        if (!hwnd) {
+            return 0;
         }
 
-        return 0;
+        console.log(`获取到目标窗口${hwnd}`);
+        return await dm.BindWindowEx(hwnd, 'gdi', 'dx.mouse.input.lock.api3', 'windows', '', 0);  
     },
 
     // 是否在游戏内
@@ -143,9 +155,48 @@ export default {
         await utils.tryCloseBox(fuben.title, fuben.close);
     },
 
-    async test() {
-        await dm.MoveTo(740, 872);
-        await dm.LeftClick();
+    // 开vip宝箱
+    async openVipBox() {
+        const {go, box, open, again, ok, close} = mapPoint.vipBox;
+        const hasGo = await utils.findWord(go);
+        const hasBox = await utils.findWord(box);
+        if (hasBox) {
+            await utils.clickPointCenter(box);
+            await delay(2000);
+
+            for (const item of open) {
+                const canGet = await utils.checkColor(item);
+                if (!canGet) {
+                    console.log('已经领完了');
+                    continue;
+                }
+
+                await utils.clickPointCenter(item);
+                await delay(3500);
+                let hasNext = await utils.findWord(again);
+                console.log('hasNext', hasNext);
+                do {
+                    await utils.clickPointCenter(again);
+                    await delay(3500);
+                    hasNext = await utils.findWord(again);
+                    if (!hasNext) {
+                        await utils.clickPointCenter(ok);
+                        await delay(1000);
+                    }
+                }
+                while (hasNext);
+            }
+        }
+        else if (hasGo) {
+            await utils.clickPointCenter(go);
+            await delay(1000);
+            this.openVipBox();
+        }
+
+        // 关闭窗口
+        if (await utils.findWord(close)) {
+            await utils.clickPointCenter(close);
+        }
     }
 };
 

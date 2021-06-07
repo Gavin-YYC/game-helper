@@ -66,8 +66,8 @@ export default {
         },
 
         async action() {
-            await dmFuncs.test();
-            // await dmFuncs.autoSetting();
+            await dmFuncs.autoSetting();
+            await dmFuncs.openVipBox();
             // await dmFuncs.autoFuben();
         }
     }
